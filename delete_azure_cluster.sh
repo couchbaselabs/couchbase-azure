@@ -1,6 +1,7 @@
 #!/bin/sh
+account="cb@cihangirbhotmail.onmicrosoft.com"
 
-azure login -u cb@cihangirbhotmail.onmicrosoft.com
+azure login -u $account
 azure config mode asm
 for ((i=1; i<=8; i++))
 do
