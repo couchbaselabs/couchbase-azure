@@ -1,6 +1,6 @@
 #!/bin/sh
-download="https://onedrive.live.com/download?resid=EABC62172B7182F3!17804&authkey=!ABZgK4rL3PnDY9A"
-binary="couchbase-server-enterprise_4.5.0-1953-ubuntu14.04_amd64.deb"
+download="https://onedrive.live.com/download?resid=EABC62172B7182F3!17813&authkey=!ABcJ7cALjo_KAg0"
+binary="couchbase-server-enterprise_4.5.0-2047-ubuntu14.04_amd64.deb"
 region="'west US'"
 account="cb@cihangirbhotmail.onmicrosoft.com"
 auth_cert="/Users/cihan/myCert.pem"
@@ -47,7 +47,7 @@ do
 		echo "first node IP:  $first_node_ip"
 
 		echo "##### RUNNING INIT #####"
-		cmd="ssh -p $i azureuser@couchbase-west.cloudapp.net -i /Users/cihan/myPrivateKey.key -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli cluster-init -c $first_node_ip:8091 --cluster-username=cb --cluster-password=couchB@SE --cluster-init-ramsize=4000 --services=data"
+		cmd="ssh -p $i azureuser@couchbase-west.cloudapp.net -i /Users/cihan/myPrivateKey.key -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli cluster-init -c $first_node_ip:8091 --cluster-username=cb --cluster-password=couchB@SE --cluster-init-ramsize=4000 --services=data,query,index --cluster-index-ramsize=4000"
 		echo "RUNNING:" $cmd
 		eval $cmd
 	else
@@ -55,7 +55,7 @@ do
 		echo "node IP: $node_ip"
 
 		echo "##### RUNNING ADD #####"
-		cmd="ssh -p $i azureuser@couchbase-west.cloudapp.net -i /Users/cihan/myPrivateKey.key /opt/couchbase/bin/couchbase-cli server-add -c $first_node_ip:8091 -u cb -p couchB@SE --server-add=$node_ip:8091 --server-add-username=cb --server-add-password=couchB@SE --services=data"
+		cmd="ssh -p $i azureuser@couchbase-west.cloudapp.net -i /Users/cihan/myPrivateKey.key /opt/couchbase/bin/couchbase-cli server-add -c $first_node_ip:8091 -u cb -p couchB@SE --server-add=$node_ip:8091 --server-add-username=cb --server-add-password=couchB@SE --services=data,index,query --cluster-index-ramsize=4000"
 		echo "RUNNING:" $cmd
 		eval $cmd
 	fi
