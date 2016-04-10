@@ -1,5 +1,6 @@
 #!/bin/sh
 account="cb@cihangirbhotmail.onmicrosoft.com"
+vnet_name="cb_private1"
 
 azure login -u $account
 
@@ -11,3 +12,6 @@ do
 	echo "Working on deleting instance: $i"
 	azure vm delete cbase-$i -q
 done
+
+#delete the vnet
+azure network vnet delete $vnet_name -q
