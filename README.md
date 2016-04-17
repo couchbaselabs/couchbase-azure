@@ -1,5 +1,6 @@
 # couchbase-azure
-setup a couchbase server cluster on azure with couchbase server v4.0 or later. the parameters at the top control the setup parameters.
+setup a couchbase server cluster on azure with couchbase server v4.0 or later. 
+OSx Scripts: OSx script with control parameters at the top.
 
 #create_azure_cluster .sh
 used to create the VMs, download and install couchbase server and set up the couchbase server cluster.
