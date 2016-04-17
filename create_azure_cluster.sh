@@ -10,17 +10,21 @@ cluster_ramsize=4000
 total_nodes=8
 
 #azure settings
+
 region="'west US'"
 image_name="b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04_4-LTS-amd64-server-20160314-en-us-30GB"
 account="cb@cihangirbhotmail.onmicrosoft.com"
+#use "azure login -u account" +  "azure account show" to get  account and subscriptionid
 subscription_id="3d01005f-455d-4430-b930-8455310e1f65"
+#use ssh-keygen to generate the keys - public and private
 auth_cert_public="~/test.pub"
 auth_cert_private="~/test.key"
 vm_name_prefix="cbase"
 vm_admin_account_name="cb_vmadmin"
+#vnet keeps azure vms in the same subnet
 vnet_name="cb_private1"
 
-#misc
+#misc settings
 remove_known_hosts=1
 
 
