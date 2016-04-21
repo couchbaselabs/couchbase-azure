@@ -41,7 +41,7 @@ setting file for the automated setup.
     vnet_name: virtual network name for the couchbase server subnet. vnet setup is done for network communication 
     efficiency. virtual network gets  private IPs in a single subnet for all nodes. 
 ````
-**Misc Setting**
+**Misc Setting:**
 ````
     remove_known_hosts: 1 to remove ~/.ssh/known_hosts file. script uses ssh to connect to newly provisioned nodes. 
     known hosts file can throw warnings and errors under repeated runs. remove known_hosts to prevent warnings and 
