@@ -16,10 +16,10 @@ used to clean up the cluster and vms.
 ###settings.sh
 setting file for the automated setup.
 - Couchbase Server Settings:
-couchbase_download: link to the download URL.
-couchbase_binary: name of the binary
-couchbase_admin_account_name: database administration account for Couchbase Server cluster.
-couchbase_admin_account_password: database administration password for Couchbase Server cluster.
+    couchbase_download: link to the download URL.
+    couchbase_binary: name of the binary
+    couchbase_admin_account_name: database administration account for Couchbase Server cluster.
+    couchbase_admin_account_password: database administration password for Couchbase Server cluster.
 cluster_index_ramsize: initial index RAM quota
 cluster_ramsize: initial data RAM quota
 total_nodes: number of nodes to set up.
