@@ -1,11 +1,7 @@
 #!/bin/sh
-#azure settings
-#account - "azure account show"
-account="cb@cihangirbhotmail.onmicrosoft.com"
-#vnet name created for the cluster
-vnet_name="cb_private1"
-vm_name_prefix="cbase"
-total_nodes=8
+
+#read settings
+source ./settings.sh
 
 #warning
 echo "WARNING, This will wipe out your cluster and delete all your data. [y/n]"
