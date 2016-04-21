@@ -38,5 +38,7 @@ setting file for the automated setup.
     vm_admin_account_name: vm administrator account name
     vnet_name: virtual network name for the couchbase server subnmet. virtual network allows private IPs in a single to be used for efficient network communication. 
 ````
-- Misc Setting
+**Misc Setting**
+````
 remove_known_hosts: 1 to remove ~/.ssh/known_hosts file. script uses ssh to connect to newly provisioned nodes. known hosts file can throw warnings and errors under repeated runs. remove known_hosts to prevent warnings and errors when connecting to vms.
+````
