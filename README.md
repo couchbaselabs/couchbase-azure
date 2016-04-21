@@ -15,6 +15,7 @@ used to clean up the cluster and vms.
 
 ###settings.sh
 setting file for the automated setup.
+
 **Couchbase Server Settings:**
 ````
     couchbase_download: link to the download URL.
@@ -28,7 +29,7 @@ setting file for the automated setup.
 
 **Azure VM Config Settings:**
 ````
-    region: _region for the setup. default is us-west_
+    region: region for the setup. default is us-west
     image_name: VM image to use. default is classic ubuntu 14.04
     account: your azure account
     subscription_id: azure subscription id. if you don't know your subscription id, use "azure login -u account" +  
@@ -37,8 +38,8 @@ setting file for the automated setup.
     auth_cert_private: auth private key. 
     vm_name_prefix: vm name prefix
     vm_admin_account_name: vm administrator account name
-    vnet_name: virtual network name for the couchbase server subnet. vnet setup is done for network communication efficiency.
-    virtual network gets  private IPs in a single subnet for all nodes. 
+    vnet_name: virtual network name for the couchbase server subnet. vnet setup is done for network communication 
+    efficiency. virtual network gets  private IPs in a single subnet for all nodes. 
 ````
 **Misc Setting**
 ````
