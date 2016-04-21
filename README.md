@@ -7,14 +7,14 @@ OSx script for setting up a multi node Couchbase Server cluster on Azure VMs.
 ###install_prereqs.sh
 install required dependencies like node and azure-cli.
 
+###settings.sh
+setting file for the automated setup. populate with your details before running create_ and delete_ scripts.
+
 ###create_azure_cluster .sh
-main script to create the VMs, download and install Couchbase Server and set up the couchbase server cluster with a final rebalance.
+main script to create the VMs, download and install Couchbase Server and set up the couchbase server cluster with a final rebalance. Will require you to login to your Azure account before any changes to the azure env is started. 
 
 ###delete_azure_cluster .sh
-used to clean up the cluster and vms.
-
-###settings.sh
-setting file for the automated setup.
+used to clean up the cluster and vms. Will require you to login to your Azure account before any changes to the azure env is started.
 
 **Couchbase Server Settings:**
 ````
