@@ -1,4 +1,5 @@
 # couchbase-azure
+-----------------
 setup a couchbase server cluster on azure with couchbase server v4.0 or later. 
 
 ##OSx Scripts: 
@@ -16,6 +17,7 @@ used to clean up the cluster and vms.
 ###settings.sh
 setting file for the automated setup.
 Couchbase Server Settings:
+````
     couchbase_download: link to the download URL.
     couchbase_binary: name of the binary
     couchbase_admin_account_name: database administration account for Couchbase Server cluster.
@@ -23,7 +25,7 @@ Couchbase Server Settings:
     cluster_index_ramsize: initial index RAM quota
     cluster_ramsize: initial data RAM quota
     total_nodes: number of nodes to set up.
-
+````
 **Azure VM Config Settings**
 region: region for the setup. default is us-west
 image_name: VM image to use. default is classic ubuntu 14.04
