@@ -15,7 +15,7 @@ used to clean up the cluster and vms.
 
 ###settings.sh
 setting file for the automated setup.
-- Couchbase Server Settings
+- Couchbase Server Settings:
 couchbase_download: link to the download URL.
 couchbase_binary: name of the binary
 couchbase_admin_account_name: database administration account for Couchbase Server cluster.
