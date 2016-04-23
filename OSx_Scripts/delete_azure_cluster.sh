@@ -10,7 +10,7 @@ read yes_no
 if [ $yes_no == 'y' ]
 then
     #login
-    azure login -u $account
+    azure login -u $azure_account
 
     #set mode to asm
     azure config mode asm

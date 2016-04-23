@@ -11,7 +11,7 @@ fi
 
 #switch azure mode to asm
 azure config mode asm
-azure login -u $account
+azure login -u $azure_account
 
 #create vnet with large vm count - 1024
 azure network vnet create --vnet $vnet_name -l "west US" -e 10.0.0.1 -m 1024
@@ -49,7 +49,7 @@ do
         echo "FIRST NODE IP:  $first_node_ip"
 
 		echo "##### RUNNING INIT #####"
-		cmd="ssh -p $i $vm_admin_account_name@couchbase-service.cloudapp.net -i $auth_cert_private -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli cluster-init -c $first_node_ip:8091 --cluster-username=$couchbase_admin_account_name --cluster-password=$couchbase_admin_account_password --cluster-init-ramsize=$cluster_ramsize --services=data,query,index --cluster-index-ramsize=$cluster_index_ramsize"
+		cmd="ssh -p $i $vm_admin_account_name@couchbase-service.cloudapp.net -i $auth_cert_private -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli cluster-init -c $first_node_ip:8091 --cluster-username=$couchbase_admin_account_name --cluster-password=$couchbase_admin_account_password --cluster-init-ramsize=$cluster_ramsize --services=$node_services --cluster-index-ramsize=$cluster_index_ramsize"
 		echo "RUNNING:" $cmd
 		eval $cmd
 	else
@@ -60,7 +60,7 @@ do
         echo "NODE IP: $node_ip"
 
 		echo "##### RUNNING ADD #####"
-		cmd="ssh -p $i $vm_admin_account_name@couchbase-service.cloudapp.net -i $auth_cert_private /opt/couchbase/bin/couchbase-cli server-add -c $first_node_ip:8091 -u $couchbase_admin_account_name -p $couchbase_admin_account_password --server-add=$node_ip:8091 --server-add-username=$couchbase_admin_account_name --server-add-password=$couchbase_admin_account_password --services=data,index,query"
+		cmd="ssh -p $i $vm_admin_account_name@couchbase-service.cloudapp.net -i $auth_cert_private /opt/couchbase/bin/couchbase-cli server-add -c $first_node_ip:8091 -u $couchbase_admin_account_name -p $couchbase_admin_account_password --server-add=$node_ip:8091 --server-add-username=$couchbase_admin_account_name --server-add-password=$couchbase_admin_account_password --services=$node_services"
 		echo "RUNNING:" $cmd
 		eval $cmd
 	fi
