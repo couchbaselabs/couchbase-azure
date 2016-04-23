@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #read settings
-source ./settings.sh
+source ./my_settings.sh
 
 #warning
 echo "WARNING, This will wipe out your cluster and delete all your data. [y/n]"
