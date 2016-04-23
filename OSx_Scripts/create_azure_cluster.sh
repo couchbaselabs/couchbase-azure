@@ -20,7 +20,7 @@ for ((i=1; i<=$total_nodes; i++))
 do
 	#create vm
 	echo "Working on instance: $i"
-    cmd="azure vm create -l $region -z Standard_D11 -e $i -n $vm_name_prefix-$i -w $vnet_name -c $service_name -t $auth_cert_public -g $vm_admin_account_name -P -s $subscription_id $image_name"
+    cmd="azure vm create -l $region -z $vm_sku -e $i -n $vm_name_prefix-$i -w $vnet_name -c $service_name -t $auth_cert_public -g $vm_admin_account_name -P -s $subscription_id $image_name"
     echo "RUNNING:" $cmd 
     eval $cmd
     sleep 120
