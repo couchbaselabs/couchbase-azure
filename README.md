@@ -1,20 +1,14 @@
 # couchbase-azure
-setup a couchbase server cluster on azure with couchbase server v4.0 or later. 
+Simple automated setup a couchbase server cluster on azure. Ideal for build up and teardown of test environments or functional tests. Works with couchbase server v4.0 or later. Simply point to the build you like to use and provide azure account details in the settings.sh file, followed by create_azure_cluster. use delete_azure_cluster to destroy the cluster.
 
 ##OSx Scripts: 
 OSx script for setting up a multi node Couchbase Server cluster on Azure VMs.
 
-###install_prereqs.sh
-install required dependencies like node and azure-cli.
+###Prerequisites
+install_prereqs.sh: Install required dependencies like node and azure-cli. Run this before your first run.
 
-###settings.sh
-setting file for the automated setup. populate with your details before running create_ and delete_ scripts.
-
-###create_azure_cluster .sh
-main script to create the VMs, download and install Couchbase Server and set up the couchbase server cluster with a final rebalance. Will require you to login to your Azure account before any changes to the azure env is started. 
-
-###delete_azure_cluster .sh
-used to clean up the cluster and vms. Will require you to login to your Azure account before any changes to the azure env is started.
+###Settings
+settings.sh: setting file for the automated cluster setup. Modify to use your desired azure and couchbase settings details before running create_ and delete_ scripts.
 
 **Couchbase Server Settings:**
 ````
@@ -41,9 +35,8 @@ used to clean up the cluster and vms. Will require you to login to your Azure ac
     vnet_name: virtual network name for the couchbase server subnet. vnet setup is done for network communication 
     efficiency. virtual network gets  private IPs in a single subnet for all nodes. 
 ````
-**Misc Setting:**
-````
-    remove_known_hosts: 1 to remove ~/.ssh/known_hosts file. script uses ssh to connect to newly provisioned nodes. 
-    known hosts file can throw warnings and errors under repeated runs. remove known_hosts to prevent warnings and 
-    errors when connecting to vms.
-````
+###Create Azure Cluster
+create_azure_cluster.sh: Main script to create the VMs, download and install Couchbase Server and set up the cluster with a final rebalance. Will require you to login to your Azure account before any changes to the azure env is started. 
+
+###Delete Azure Cluster
+delete_azure_cluster.sh: used to clean up the cluster and vms. Will require you to login to your Azure account before any changes to the azure env is started.
