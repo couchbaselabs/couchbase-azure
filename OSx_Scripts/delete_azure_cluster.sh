@@ -15,8 +15,10 @@ then
     #set mode to asm
     azure config mode asm
 
+    azure vm delete $vm_name_prefix-jumpbox -q
+
     #loop to clean up all nodes.
-    for ((i=1; i<=$total_nodes; i++))
+    for ((i=1; i<=$couchbase_total_nodes; i++))
     do
 	    echo "DELETING INSTANCE: $i"
 	    azure vm delete $vm_name_prefix-$i -q

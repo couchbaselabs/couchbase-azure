@@ -18,13 +18,13 @@ settings.sh: setting file for the automated cluster setup. Modify to use your de
     couchbase_admin_account_password: database administration password for Couchbase Server cluster.
     cluster_index_ramsize: initial index RAM quota
     cluster_ramsize: initial data RAM quota
-    total_nodes: number of nodes to set up.
+    couchbase_total_nodes: number of nodes to set up.
 ````
 
 **Azure VM Config Settings:**
 ````
     region: region for the setup. default is us-west
-    image_name: VM image to use. default is classic ubuntu 14.04
+    couchbase_vm_image_name: VM image to use. default is classic ubuntu 14.04
     account: your azure account
     subscription_id: azure subscription id. if you don't know your subscription id, use "azure login -u account" +  
     "azure account show" to get  account and subscriptionid 
