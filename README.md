@@ -1,4 +1,4 @@
-# couchbase-azure
+# couchbase-azure simple & automated setup
 Simple automated setup a couchbase server cluster on azure. Ideal for build up and teardown of test environments or functional tests. Works with couchbase server v4.0 or later. Simply point to the build you like to use and provide azure account details in the settings.sh file, followed by create_azure_cluster. use delete_azure_cluster to destroy the cluster.
 
 ##OSx Scripts: 
