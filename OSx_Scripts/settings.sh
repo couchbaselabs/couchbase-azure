@@ -34,11 +34,14 @@ region="'west US'"
 
 
 ##jumpbox settings
+#disable jumpbox: set to 1 to diable jumpbox. jumpbox is provisioned for security reasons. you may need to open 8091 and other couchbase server ports to the public internet without it. 
+disable_jumpbox=0
+#image to use for the jumpbox. using windows server by default
 jumpbox_image_name="a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-Datacenter-20160329-en.us-127GB.vhd"
 #jumpbox vm sku to use. 
 jumpbox_vm_sku="Standard_D2"
-jumpbox_admin_account_name="cb_vmadmin"
-jumpbox_admin_account_password="couchB@SE123"
+jumpbox_vm_admin_account_name="cb_vmadmin"
+jumpbox_vm_admin_account_password="couchB@SE123"
 
 ##cluster settings
 #ubuntu OS image to use on azure
@@ -49,4 +52,7 @@ couchbase_vm_sku="Standard_D2"
 couchbase_vm_admin_account_name="cb_vmadmin"
 
 #misc settings
-remove_known_hosts=0
+#this will enable removing the .ssh/known_hosts file under MacOS. The file gets in the way of reprovisioning the same node names for the cluster.
+remove_known_hosts=1
+#enable fast delete will supress confirmation on deletes of each VM. do this only if you are certain delete will not harm your existing VMs and you have tried the script multiple times.
+enable_fast_delete=0
