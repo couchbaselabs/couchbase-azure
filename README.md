@@ -53,7 +53,7 @@ settings.sh: setting file for the automated cluster setup. Modify to use your de
 ````
 **Misc Config**
 ````
-    remove_known_hosts: this will enable removing the .ssh/known_hosts file under MacOS. The file gets in the way of reprovisioning the same node names for the cluster.
+    **remove_known_hosts**: this will enable removing the .ssh/known_hosts file under MacOS. The file gets in the way of reprovisioning the same node names for the cluster.
     enable_fast_delete: enable fast delete will supress confirmation on deletes of each VM. do this only if you are certain delete will not harm your existing VMs and you have tried the script multiple times.
 ````
 
