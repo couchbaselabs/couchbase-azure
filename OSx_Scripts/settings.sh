@@ -21,8 +21,8 @@ couchbase_cluster_ramsize=1000
 azure_account="your_account@your_domain.onmicrosoft.com"
 azure_subscription_id="00000000-0000-0000-0000-000000000000"
 #TODO: certs for ssh. use ssh-keygen to generate the keys - public and private
-couchbase_vm_auth_cert_public="~/your_public_key.pub"
-couchbase_vm_auth_cert_private="~/your_private_key.key"
+vm_auth_cert_public="~/your_public_key.pub"
+vm_auth_cert_private="~/your_private_key.key"
 #prefix to use for the VM name for all nodes 
 vm_name_prefix="cb_"
 #vnet name to keeps azure vms in the same subnet 
