@@ -13,12 +13,19 @@ settings.sh: setting file for the automated cluster setup. Modify to use your de
 **Couchbase Server Settings:**
 ````
     couchbase_total_nodes: set the number of nodes in the cluster.
+    
     couchbase_download: link to the download URL for ubuntu 14.04 version couchbase server. 
+    
     couchbase_binary: name of the binary for couchbase. used to help rename the downloaded binary. 
+    
     couchbase_admin_account_name: database administration account for Couchbase Server cluster. TODO: change this value before use. 
+    
     couchbase_admin_account_password: database administration password for Couchbase Server cluster. TODO: change this value before use. 
+    
     couchbase_node_services: services to enable on all nodes (data, index, query etc.). All deployments do the simpler homogenious deployment with the same services on all nodes. "data" service is always required and other services are optional. 
+    
     cluster_ramsize: initial data service RAM quota per node. can be changed under settings tab in the couchbase server web console. 
+    
     cluster_index_ramsize: initial index service RAM quota per node. used if index service is enabled. can be changed under settings tab in the couchbase server web console. 
 ````
 
