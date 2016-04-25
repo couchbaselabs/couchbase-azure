@@ -40,7 +40,9 @@ disable_jumpbox=0
 jumpbox_image_name="a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-Datacenter-20160329-en.us-127GB.vhd"
 #jumpbox vm sku to use. 
 jumpbox_vm_sku="Standard_D2"
+#TODO: change this username
 jumpbox_vm_admin_account_name="cb_vmadmin"
+#TODO: change this password
 jumpbox_vm_admin_account_password="couchB@SE123"
 
 ##cluster settings
