@@ -19,7 +19,7 @@ couchbase_cluster_ramsize=1000
 ##azure settings
 #TODO: use "azure login -u account" +  "azure account show" to get  account and subscriptionid
 azure_account="your_account@your_domain.onmicrosoft.com"
-subscription_id="00000000-0000-0000-0000-000000000000"
+azure_subscription_id="00000000-0000-0000-0000-000000000000"
 #TODO: certs for ssh. use ssh-keygen to generate the keys - public and private
 couchbase_vm_auth_cert_public="~/your_public_key.pub"
 couchbase_vm_auth_cert_private="~/your_private_key.key"

@@ -24,9 +24,9 @@ settings.sh: setting file for the automated cluster setup. Modify to use your de
 
 **Azure Config Settings:**
 ````
-    account: your fully qualified azure account. account you use to login to portal. best practice is to use a delegate admin account to protect against account compromise. TODO: change this value before use.
+    azure_account: your fully qualified azure account. account you use to login to portal. best practice is to use a delegate admin account to protect against account compromise. TODO: change this value before use.
     
-    subscription_id: azure subscription id for the azure account. if you don't know your subscription id, use "azure login -u account" +  "azure account show" to get  account and subscriptionid. TODO: change this value before use.
+    azure_subscription_id: azure subscription id for the azure account. if you don't know your subscription id, use "azure login -u account" +  "azure account show" to get  account and subscriptionid. TODO: change this value before use.
     
     auth_cert_public: auth public key used for provisioning the couchbase server nodes on ubuntu. TODO: change this value before use. use ssh-keygen to generate the keys - public and private keys. 
     

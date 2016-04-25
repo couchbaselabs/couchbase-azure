@@ -20,7 +20,7 @@ azure network vnet create --vnet $vnet_name -l "west US" -e 10.0.0.1 -m 1024
 if [ $disable_jumpbox -ne 1 ]
     then
 	echo "INFO: Working on jumpbox instance."
-    cmd="azure vm create -l $region -z $jumpbox_vm_sku -n $vm_name_prefix-jumpbox -w $vnet_name -c $service_name -r -g $jumpbox_vm_admin_account_name -p $jumpbox_vm_admin_account_password -s $subscription_id $jumpbox_image_name"
+    cmd="azure vm create -l $region -z $jumpbox_vm_sku -n $vm_name_prefix-jumpbox -w $vnet_name -c $service_name -r -g $jumpbox_vm_admin_account_name -p $jumpbox_vm_admin_account_password -s $azure_subscription_id $jumpbox_image_name"
     echo "INFO: RUNNING:" $cmd 
     eval $cmd
 fi
@@ -29,7 +29,7 @@ for ((i=1; i<=$couchbase_total_nodes; i++))
 do
 	#create vm
 	echo "INFO: Working on instance: $i"
-    cmd="azure vm create -l $region -z $couchbase_vm_sku -e $i -n $vm_name_prefix-$i -w $vnet_name -c $service_name -t $couchbase_vm_auth_cert_public -g $couchbase_vm_admin_account_name -P -s $subscription_id $couchbase_vm_image_name"
+    cmd="azure vm create -l $region -z $couchbase_vm_sku -e $i -n $vm_name_prefix-$i -w $vnet_name -c $service_name -t $couchbase_vm_auth_cert_public -g $couchbase_vm_admin_account_name -P -s $azure_subscription_id $couchbase_vm_image_name"
     echo "INFO: RUNNING:" $cmd 
     eval $cmd
     sleep 120
