@@ -35,13 +35,13 @@ do
     sleep 120
 
 	#download
-	echo "DOWNLOADING COUCHBASE SERVER"
+	echo "INFO: Downloading Couchbase Server"
 	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo wget \"$couchbase_download\" -O $couchbase_binary'"
 	echo "INFO: RUNNING:" $cmd
 	eval $cmd
 
 	#install
-	echo "install 4.0"
+	echo "INFO: Installing Couchbase Server"
 	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo dpkg -i $couchbase_binary'"
 	echo "INFO: RUNNING:" $cmd
 	eval $cmd
