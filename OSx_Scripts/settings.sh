@@ -4,8 +4,8 @@
 #total nodes in cluster
 couchbase_total_nodes=3
 #ubuntu 14 image for couchbase server. version can be 4.0 or later
-couchbase_download="http://packages.couchbase.com/releases/4.1.0/couchbase-server-enterprise_4.1.0-ubuntu14.04_amd64.deb"
-couchbase_binary="couchbase-server-enterprise_4.1.0-ubuntu14.04_amd64.deb"
+couchbase_download="http://packages.couchbase.com/releases/4.5.0-beta/couchbase-server-enterprise_4.5.0-beta-ubuntu14.04_amd64.deb"
+couchbase_binary="couchbase-server-enterprise_4.5.0-beta-ubuntu14.04_amd64.deb"
 #TODO: change this username
 couchbase_admin_account_name="cb_dbadmin"
 #TODO: change this password
