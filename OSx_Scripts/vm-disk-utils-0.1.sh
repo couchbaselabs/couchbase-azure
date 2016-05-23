@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Origin: https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/shared_scripts/ubuntu/vm-disk-utils-0.1.sh
+# Origin:  https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/shared_scripts/ubuntu/vm-disk-utils-0.1.sh 
 #
 # The MIT License (MIT)
 #
