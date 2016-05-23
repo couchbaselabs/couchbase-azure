@@ -27,7 +27,7 @@
 # Script Name: vm-disk-utils.sh
 # Author: Trent Swanson - Full Scale 180 Inc github:(trentmswanson)
 # Version: 0.1
-# Last Modified By:       Trent Swanson
+# Last Modified By:       Cihan Biyikoglu
 # Description:
 #  This script automates the partitioning and formatting of data disks
 #  Data disks can be partitioned and formatted as seperate disks or in a RAID0 configuration
