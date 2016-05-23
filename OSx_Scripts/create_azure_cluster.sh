@@ -70,7 +70,7 @@ do
 	#set up RAID0 on data-disks
 	echo "INFO: Establishing RAID0 on /datadisks/disk1"
 	#download script
-	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo wget \"https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/shared_scripts/ubuntu/vm-disk-utils-0.1.sh\"'"
+	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo wget \"https://raw.githubusercontent.com/couchbaselabs/couchbase-azure/master/OSx_Scripts/vm-disk-utils-0.1.sh\"'"
 	echo "INFO: RUNNING:" $cmd
 	eval $cmd
 	#chmod for script execution
