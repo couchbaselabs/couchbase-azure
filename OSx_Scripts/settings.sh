@@ -31,6 +31,10 @@ vnet_name="cb-vnet1"
 service_name="couchbase-service"
 #region where to provision all nodes
 region="'west US'"
+#number of data-disks to attach - check the max data-disk allowed on each SKU
+data_disk_count=4
+#size of the data-disk in GB max is 1023
+data_disk_size=1023
 
 
 ##jumpbox settings

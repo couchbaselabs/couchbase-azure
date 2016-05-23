@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #read settings
-source ./settings.sh
+source ./my_settings.sh
 
 #may need to remove known hosts file if exists.
 if [ $remove_known_hosts -eq 1 ]
@@ -33,14 +33,44 @@ do
     echo "INFO: RUNNING:" $cmd 
     eval $cmd
     sleep 120
+	
+	for ((j=1; j<=$data_disk_count; j++))
+	do 
+		#attach data-disks to vm
+		echo "INFO: Working on data-disks: $j"
+    	cmd="azure vm disk attach-new -c ReadOnly -s $azure_subscription_id $vm_name_prefix-$i $data_disk_size"
+    	echo "INFO: RUNNING:" $cmd 
+    	eval $cmd
+	done
 
-	#download
+	#set up RAID0 on data-disks
+	echo "INFO: Establishing RAID0 on /datadisks/disk1"
+	#download script
+	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo wget \"https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/shared_scripts/ubuntu/vm-disk-utils-0.1.sh\"'"
+	echo "INFO: RUNNING:" $cmd
+	eval $cmd
+	#chmod for script execution
+	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo chmod 555 vm-disk-utils-0.1.sh'"
+	echo "INFO: RUNNING:" $cmd
+	eval $cmd
+	
+	#install mdadm
+	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo env DEBIAN_FRONTEND=noninteractive apt-get -y install mdadm'"
+	echo "INFO: RUNNING:" $cmd
+	eval $cmd
+	
+	#execute RAID disk setup script
+	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo ./vm-disk-utils-0.1.sh -b /datadisks -s'"
+	echo "INFO: RUNNING:" $cmd
+	eval $cmd
+
+	#download couchbase server
 	echo "INFO: Downloading Couchbase Server"
 	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo wget \"$couchbase_download\" -O $couchbase_binary'"
 	echo "INFO: RUNNING:" $cmd
 	eval $cmd
 
-	#install
+	#install couchbase server
 	echo "INFO: Installing Couchbase Server"
 	cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo dpkg -i $couchbase_binary'"
 	echo "INFO: RUNNING:" $cmd
@@ -57,7 +87,21 @@ do
         first_node_ip=$(eval $cmd)  
         echo "INFO: FIRST NODE IP:  $first_node_ip"
 
-		echo "##### RUNNING INIT #####"
+		#execute permission change script
+		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo chmod 755 /datadisks/disk1'"
+		echo "INFO: RUNNING:" $cmd
+		eval $cmd
+		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo chown couchbase:couchbase /datadisks/disk1'"
+		echo "INFO: RUNNING:" $cmd
+		eval $cmd
+		
+		#set data and index path to data-disk location
+		echo "##### RUNNING NODE-INIT #####"
+		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli node-init -c $first_node_ip:8091 -u $couchbase_admin_account_name -p $couchbase_admin_account_password  --node-init-data-path=/datadisks/disk1 --node-init-index-path=/datadisks/disk1"
+		echo "INFO: RUNNING:" $cmd
+		eval $cmd
+
+		echo "##### RUNNING CLUSTER-INIT #####"
 		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli cluster-init -c $first_node_ip:8091 --cluster-username=$couchbase_admin_account_name --cluster-password=$couchbase_admin_account_password --cluster-init-ramsize=$couchbase_cluster_ramsize --services=$couchbase_node_services --cluster-index-ramsize=$couchbase_cluster_index_ramsize"
 		echo "INFO: RUNNING:" $cmd
 		eval $cmd
@@ -67,8 +111,22 @@ do
         echo "INFO: RUNNING:" $cmd
         node_ip=$(eval $cmd)  
         echo "INFO: NODE IP: $node_ip"
+		
+		#execute permission change script
+		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo chmod 755 /datadisks/disk1'"
+		echo "INFO: RUNNING:" $cmd
+		eval $cmd
+		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no 'sudo chown couchbase:couchbase /datadisks/disk1'"
+		echo "INFO: RUNNING:" $cmd
+		eval $cmd
+		
+		#set data and index path to data-disk location
+		echo "##### RUNNING NODE-INIT #####"
+		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli node-init -c $node_ip:8091 -u $couchbase_admin_account_name -p $couchbase_admin_account_password  --node-init-data-path=/datadisks/disk1 --node-init-index-path=/datadisks/disk1"
+		echo "INFO: RUNNING:" $cmd
+		eval $cmd
 
-		echo "##### RUNNING ADD #####"
+		echo "##### RUNNING SERVER-ADD #####"
 		cmd="ssh -p $i $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private /opt/couchbase/bin/couchbase-cli server-add -c $first_node_ip:8091 -u $couchbase_admin_account_name -p $couchbase_admin_account_password --server-add=$node_ip:8091 --server-add-username=$couchbase_admin_account_name --server-add-password=$couchbase_admin_account_password --services=$couchbase_node_services"
 		echo "INFO: RUNNING:" $cmd
 		eval $cmd
@@ -80,6 +138,7 @@ echo "INFO: ##### RUNNING REBALANCE #####"
 cmd="ssh -p 1 $couchbase_vm_admin_account_name@$service_name.cloudapp.net -i $vm_auth_cert_private -o StrictHostKeyChecking=no /opt/couchbase/bin/couchbase-cli rebalance -c $first_node_ip:8091 -u $couchbase_admin_account_name -p $couchbase_admin_account_password"
 echo "INFO: RUNNING:" $cmd
 eval $cmd
+
 
 echo "INFO: SETUP COMPLETE!"
 echo "##############################################################################"
